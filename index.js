@@ -8,6 +8,7 @@ const GoogleRouter = require("./routers/googleAuth.router")
 const app = express();
 const passport = require("./config/google.auth");
 const cookieSession = require("cookie-session");
+const session=require("express-session")
 const AppoinmtentRouter = require('./routers/appointment.router');
 
 //=============> ENV VARIABLES
@@ -34,6 +35,21 @@ app.get('/', (req, res) => res.send({ Message: 'ALS server working fine' }))
 app.use(
   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
 );
+// app.use(passport.initialize());
+// app.use(passport.session());
+// app.use(
+//   session({
+//     secret: "lama",
+//     resave: true,
+//     saveUninitialized: true,
+//     cookie: {
+//       sameSite: "none",
+//       secure: true,
+//       maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+//     }
+//   }))
+
+  // { name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 }
 app.use(passport.initialize());
 app.use(passport.session());
 
